@@ -15,6 +15,7 @@
 #include "../../utilities/loggerLib.hpp"
 #include "../MQTT.hpp"
 #include "../HTTP.hpp"
+#include "../COAP.hpp"
 
 enum DataUploadProtocol dataUploadProtocol = NONE;
 
@@ -28,6 +29,9 @@ void dataUploadSetup(enum DataUploadProtocol protocol) {
 	// Initialize HTTP client (but don't connect yet)
 	httpSetup();
 
+	// Initialize COAP client (but don't connect yet)
+	coapSetup();
+
 	// Set the protocol
 	dataUploadProtocol = protocol;
 }
@@ -39,6 +43,8 @@ bool publishSensorData(char *payload){
 			return mqttPublishSensorData(payload);
 		case HTTP:
 			return httpPublishSensorData(payload);
+		case COAP:
+			return coapPublishSensorData(payload);
 		default:
 			return false;
 	}

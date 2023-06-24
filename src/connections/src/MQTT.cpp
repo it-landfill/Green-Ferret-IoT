@@ -22,7 +22,7 @@
 #define MODULE_NAME "MQTT"
 
 // MQTT Broker configuration
-const char broker[] = "pi3aleben";
+const char broker[] = "192.168.1.18";
 const char user[] = "IoT";
 const char psw[] = "iot2023";
 int port = 1883;
@@ -75,6 +75,7 @@ void mqttSetup() {
 	// Configure MQTT client parameters
 	clientMQTT.setServer(broker, port);
 	clientMQTT.setCallback(callback);
+	logInfo(MODULE_NAME, "MQTT setup completed");
 }
 
 /**
